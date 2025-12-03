@@ -1,6 +1,17 @@
 // 37# https://projecteuler.net/problem=37
 
-let number = 197
+let number = 3797
+
+const doPrime = (number) => {
+    if (number <= 1) return false;
+    if (number <= 3) return true;
+    if (number % 2 === 0 || number % 3 === 0) return false;
+
+    for (let i = 5; i * i <= number; i += 6) {
+        if (number % i === 0 || number % (i + 2) === 0) return false;
+    }
+    return true
+}
 
 const makeNum = (num) => {
     // for(let e = 0; e < num;e++){
@@ -8,23 +19,50 @@ const makeNum = (num) => {
         let array = e.toString().split('')
         let numLen = array.length
         let number = 0
-        let checkAll = 0
         let goodNum = true
-        for(let i = 0; i <= numLen; i++){
+        let checkNum = 0
+        let numberList = []
+        for(let i = 0; i <= numLen + 1; i++){
+            number = Number(array.join(''))
+            if(checkNum == numLen){
+                break
+            }
             if(goodNum){
-                array.push(array[0])
-                array.shift()
-                number = Number(array.join(''));
-                if(number % 2 != 0){
-                    checkAll++
-                    console.log(number)
+                if(doPrime(number)){
+                    numberList.push(number)
+                    checkNum++
+                    array.shift()
                 }else{
+                    numberList = []
                     goodNum = false
+                    break
                 }
-            }else{
-                console.log("Bruh")
             }
         }
+        e = num
+        array = e.toString().split('')
+        numLen = array.length
+        number = 0
+        goodNum = true
+        checkNum = 0
+        for(let i = 0; i <= numLen + 1; i++){
+            number = Number(array.join(''))
+            if(checkNum == numLen){
+                break
+            }
+            if(goodNum){
+                if(doPrime(number)){
+                    numberList.push(number)
+                    checkNum++
+                    array.pop()
+                }else{
+                    numberList = []
+                    goodNum = false
+                    break
+                }
+            }
+        }
+        console.log(numberList)
     // }
 }
 
