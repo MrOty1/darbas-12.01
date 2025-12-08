@@ -1,6 +1,6 @@
 // 37# https://projecteuler.net/problem=37
 
-let number = 3797
+let number = 11
 
 const doPrime = (number) => {
     if (number <= 1) return false;
@@ -14,9 +14,11 @@ const doPrime = (number) => {
 }
 
 const makeNum = (num) => {
-    // for(let e = 0; e < num;e++){
-        let e = num
-        let array = e.toString().split('')
+    let totalFoundNums = 0
+    let doNumbers = 10
+    while(totalFoundNums < num){
+        doNumbers++
+        let array = doNumbers.toString().split('')
         let numLen = array.length
         let number = 0
         let goodNum = true
@@ -39,8 +41,7 @@ const makeNum = (num) => {
                 }
             }
         }
-        e = num
-        array = e.toString().split('')
+        array = doNumbers.toString().split('')
         numLen = array.length
         number = 0
         goodNum = true
@@ -62,8 +63,12 @@ const makeNum = (num) => {
                 }
             }
         }
-        console.log(numberList)
-    // }
+        if(numberList.length == doNumbers.toString().length * 2){
+            totalFoundNums++
+            console.log(doNumbers)
+            console.log(numberList)
+        }
+    }
 }
 
 makeNum(number)
